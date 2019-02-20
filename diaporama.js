@@ -1,16 +1,16 @@
 //diaporama
-var Diaporama = {
+var Slideshow = {
     items : document.getElementsByClassName("item"), 
     //touche
-    infosClavier : function(e) {
+    infoKeyboard : function(e) {
         if(e.keyCode === 39) {
-            document.addEventListener("keydown", this.suivant());
+            document.addEventListener("keydown", this.next());
         } else if(e.keyCode === 37) {
-            document.addEventListener("keydown", this.precedent());
+            document.addEventListener("keydown", this.previous());
         }
     },
 
-    suivant : function() {
+    next : function() {
         this.items[this.imageNum].style.opacity = "0"; 
         if(this.imageNum === 4) { 
             this.imageNum = 0; 
@@ -20,7 +20,7 @@ var Diaporama = {
         this.items[this.imageNum].style.opacity = "1";
     },
 
-    precedent : function() {
+    previous : function() {
         this.items[this.imageNum].style.opacity = "0"; 
         if(this.imageNum === 0) {
             this.imageNum = 4;
@@ -32,8 +32,8 @@ var Diaporama = {
 }
 
 
-document.getElementById("bouttonDroit").addEventListener("click", Diaporama.suivant.bind(Diaporama));
+document.getElementById("buttonRight").addEventListener("click", Slideshow.next.bind(Slideshow));
 
-document.getElementById("bouttonGauche").addEventListener("click", Diaporama.precedent.bind(Diaporama));
+document.getElementById("buttonLeft").addEventListener("click", Slideshow.previous.bind(Slideshow));
 
-document.addEventListener("keydown", Diaporama.infosClavier.bind(Diaporama));
+document.addEventListener("keydown", Slideshow.infoKeyboard.bind(Slideshow));
