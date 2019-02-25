@@ -1,5 +1,6 @@
 //diaporama
 var Slideshow = {
+
     items : document.getElementsByClassName("item"), 
     imageNum : 0,
     currentInterval : null,
