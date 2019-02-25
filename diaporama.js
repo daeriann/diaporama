@@ -1,12 +1,24 @@
 //diaporama
 var Slideshow = {
     items : document.getElementsByClassName("item"), 
+    imageNum : 0,
+    currentInterval : null,
+    init: function(autoplay = true){
+        this.setListeners(autoplay);
+    },
     //touche
     infoKeyboard : function(e) {
         if(e.keyCode === 39) {
-            document.addEventListener("keydown", this.next());
+            this.next();
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
         } else if(e.keyCode === 37) {
-            document.addEventListener("keydown", this.previous());
+            this.previous();
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+        }
+        else if(e.keyCode === 32){
+            this.autoplay();
         }
     },
 
@@ -28,12 +40,34 @@ var Slideshow = {
             this.imageNum--; 
         }
         this.items[this.imageNum].style.opacity = "1";
+    },
+
+    autoplay : function(){
+        if (this.currentInterval === null){
+        document.getElementById('pause').textContent = 'pause';
+        this.currentInterval = setInterval(this.next.bind(this),5000);
+        }
+        else{
+        clearInterval(this.currentInterval);
+        document.getElementById('pause').textContent = 'play';
+        this.currentInterval = null;
+        }
+    },
+    setListeners : function(autoplay){
+        document.getElementById('pause').addEventListener('click',function(e){
+            this.autoplay();
+        }.bind(this));
+        document.getElementById("buttonRight").addEventListener("click",this.next.bind(this));
+
+        document.getElementById("buttonLeft").addEventListener("click",this.previous.bind(this));
+
+        document.addEventListener("keydown", this.infoKeyboard.bind(this));
+        if(autoplay === true){
+            this.autoplay();
+        }
     }
 }
 
+var slider = Object.create(Slideshow);
 
-document.getElementById("buttonRight").addEventListener("click", Slideshow.next.bind(Slideshow));
-
-document.getElementById("buttonLeft").addEventListener("click", Slideshow.previous.bind(Slideshow));
-
-document.addEventListener("keydown", Slideshow.infoKeyboard.bind(Slideshow));
+slider.init();
