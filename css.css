@@ -13,12 +13,12 @@
     position: absolute;
     top: 45%;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     border: none;
     color: #fff;
     height: 40px;
     width: 40px;
-    border-radius: 50%;
+    border-radius: 0%;
     cursor: pointer;
 }
 figure {
@@ -48,11 +48,16 @@ figure {
     height: 100%;
 }
 #buttonRight {
-    right: -9%;
+    right: 2.3%;
 }
 
 #buttonLeft {
-    left: -9%;
+    left: 12.7%;
+}
+#pause
+{
+    left:12.7%;
+    margin-top: 18.3%;
 }
 .chevron::before {
     content: "";
